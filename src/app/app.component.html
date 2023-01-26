@@ -1,5 +1,6 @@
 <app-book-card
   [content]="book"
+  *ngFor="let book of books"
   (bookClicked)="goToBook($event)"
 ></app-book-card>
 
