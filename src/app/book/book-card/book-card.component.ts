@@ -6,7 +6,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { Book } from './book';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-book-card',
