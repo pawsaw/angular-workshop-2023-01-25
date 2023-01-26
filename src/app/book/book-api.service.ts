@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Book } from './book';
 
 @Injectable({
@@ -7,8 +8,8 @@ import { Book } from './book';
 export class BookApiService {
   constructor() {}
 
-  all(): Book[] {
-    return [
+  all(): Observable<Book[]> {
+    return of([
       {
         title: 'How to win friends',
         author: 'Dale Carnegie',
@@ -24,6 +25,6 @@ export class BookApiService {
         title: 'Start with WHY',
         abstract: "START WITH WHY shows that the leaders who've ...",
       },
-    ];
+    ]);
   }
 }

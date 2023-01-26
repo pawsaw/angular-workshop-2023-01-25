@@ -1,6 +1,11 @@
-<input (input)="updateBookSearchTerm($event)" placeholder="Search for title" />
-<app-book-card
-  [content]="book"
-  *ngFor="let book of books | bookFilter : bookSearchTerm"
-  (bookClicked)="goToBook($event)"
-></app-book-card>
+<div *ngIf="books">
+  <input
+    (input)="updateBookSearchTerm($event)"
+    placeholder="Search for title"
+  />
+  <app-book-card
+    [content]="book"
+    *ngFor="let book of books | bookFilter : bookSearchTerm"
+    (bookClicked)="goToBook($event)"
+  ></app-book-card>
+</div>
