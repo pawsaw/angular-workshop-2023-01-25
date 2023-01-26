@@ -7,6 +7,8 @@ import { Book } from './book-card/book';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  bookSearchTerm: string = '';
+
   books: Book[] = [
     {
       title: 'How to win friends',
@@ -24,6 +26,10 @@ export class AppComponent {
       abstract: "START WITH WHY shows that the leaders who've ...",
     },
   ];
+
+  updateBookSearchTerm(inputEvent: Event): void {
+    this.bookSearchTerm = (inputEvent.target as HTMLInputElement).value;
+  }
 
   goToBook(book: Book): void {
     console.log({ book });
