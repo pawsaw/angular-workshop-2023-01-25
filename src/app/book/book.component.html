@@ -1,4 +1,5 @@
-<div *ngIf="books">
+<div *ngIf="books$ | async as books">
+  <div>Number of books in collection: {{ books.length }}</div>
   <input
     (input)="updateBookSearchTerm($event)"
     placeholder="Search for title"

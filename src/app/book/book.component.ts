@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, take } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, share, take } from 'rxjs';
 import { Book } from './book';
 import { BookApiService } from './book-api.service';
 
@@ -11,25 +11,15 @@ import { BookApiService } from './book-api.service';
 export class BookComponent implements OnInit, OnDestroy {
   bookSearchTerm: string = '';
 
-  books: Book[] = [];
-  private sub: Subscription = new Subscription();
+  books$: Observable<Book[]> = of([]);
 
   constructor(public readonly bookApi: BookApiService) {}
 
   ngOnInit(): void {
-    this.sub.add(
-      this.bookApi
-        .all()
-        .pipe(take(1))
-        .subscribe((_books) => {
-          this.books = _books;
-        })
-    );
+    this.books$ = this.bookApi.all().pipe(take(1), share());
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   updateBookSearchTerm(inputEvent: Event): void {
     this.bookSearchTerm = (inputEvent.target as HTMLInputElement).value;

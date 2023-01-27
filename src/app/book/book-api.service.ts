@@ -1,30 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Book } from './book';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class BookApiService {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   all(): Observable<Book[]> {
-    return of([
-      {
-        title: 'How to win friends',
-        author: 'Dale Carnegie',
-        abstract: 'How to Win Friends and Influence ...',
-      },
-      {
-        title: 'The Willpower Instinct: How Self-Control Works ...',
-        author: 'Kelly McGonigal',
-        abstract: 'Based on Stanford University ...',
-      },
-      {
-        author: 'Simon Sinek',
-        title: 'Start with WHY',
-        abstract: "START WITH WHY shows that the leaders who've ...",
-      },
-    ]);
+    return this._http.get<Book[]>('http://localhost:4730/books');
   }
 }
